@@ -1,0 +1,18 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large data files
+data/*.csv
+data/zomato.csv
+
+# Environments & IDEs
+.venv/
+venv/
+ENV/
+.vscode/
+.idea/
+
+# Streamlit local config
+.streamlit/secrets.toml
