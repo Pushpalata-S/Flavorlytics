@@ -84,6 +84,8 @@ streamlit run Home.py
 2. Connect your GitHub account to [Streamlit Community Cloud](https://share.streamlit.io/).
 3. Set main file path to `Home.py`.
 4. Deploy! The app automatically manages NLTK resource downloads and loads cached joblib models.
+5. Local URL: http://localhost:8501
+
 
 ---
 
