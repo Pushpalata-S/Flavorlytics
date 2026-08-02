@@ -1,186 +1,95 @@
-# 🍽️ Flavorlytics
+# 🍽️ Flavorlytics — AI-Powered Restaurant Analytics & Recommendation System
 
-## AI-Powered Restaurant Analytics & Recommendation System
-
-Flavorlytics is an end-to-end data analytics project that explores restaurant trends using the Zomato Bangalore dataset. It combines exploratory data analysis, natural language processing, and machine learning to uncover customer preferences, evaluate restaurant performance, and deliver intelligent restaurant recommendations.
-
-The project demonstrates how data-driven insights can support both customers in choosing restaurants and businesses in understanding factors that influence restaurant success.
+Flavorlytics is a complete multi-page **Streamlit** web application for exploring restaurant trends, generating personalized best-value recommendations, predicting restaurant success with Machine Learning, and performing customer sentiment analysis on reviews.
 
 ---
 
-## 📂 Dataset
-
-This project uses the **Zomato Bangalore Restaurants Dataset** available on Kaggle.
-
-The dataset contains information such as:
-
-- Restaurant name and location
-- Cuisine served
-- Customer ratings and votes
-- Average cost for two people
-- Online ordering availability
-- Table booking availability
-- Customer reviews
-- Restaurant type and listed category
-
----
-
-## 🚀 Project Modules
-
-### 📊 1. Exploratory Data Analysis (EDA)
-
-Performed extensive exploratory analysis to understand restaurant performance and customer behavior.
-
-Key analyses include:
-
-- Rating distribution across restaurants
-- Cost vs Rating relationship
-- Popular cuisines and restaurant types
-- Top restaurant locations
-- Online ordering and table booking trends
-- Customer voting patterns
-- Premium restaurant analysis
-
----
-
-### 🍴 2. Restaurant Recommendation System
-
-Developed a recommendation engine that suggests restaurants based on user preferences.
-
-Recommendation parameters include:
-
-- City / Location
-- Cuisine
-- Budget
-- Customer Rating
-
-This helps users discover restaurants that best match their requirements.
-
----
-
-### 💬 3. Sentiment Analysis
-
-Applied Natural Language Processing (NLP) techniques on customer reviews to understand public opinion.
-
-The analysis includes:
-
-- Positive and negative sentiment classification
-- Frequently used words in customer reviews
-- Common complaints in low-rated restaurants
-- Customer satisfaction trends
-
----
-
-### 🤖 4. Restaurant Success Prediction
-
-Built machine learning models to predict the likelihood of a restaurant performing successfully based on historical restaurant data.
-
-Models explored include:
-
-- Logistic Regression
-- Decision Tree
-- Random Forest
-- XGBoost
-
-Model performance is evaluated using multiple classification metrics.
-
----
-
-## 📈 Business Insights
-
-The project answers questions such as:
-
-- Which locations have the highest-rated restaurants?
-- Which cuisines are most preferred by customers?
-- Does online ordering influence ratings?
-- Are expensive restaurants always highly rated?
-- What factors contribute to restaurant success?
-- Why do customers leave negative reviews?
-
----
-
-## 🛠️ Technologies Used
-
-### Programming Language
-
-- Python
-
-### Data Analysis
-
-- Pandas
-- NumPy
-
-### Data Visualization
-
-- Matplotlib
-- Seaborn
-- Plotly
-
-### Machine Learning
-
-- Scikit-learn
-- XGBoost
-
-### Natural Language Processing
-
-- NLTK
-- TextBlob
-- WordCloud
-
-### Development Environment
-
-- Google Colab
-- Jupyter Notebook
-- VS Code
-
----
-
-## 📁 Project Structure
+## 📂 Project Architecture
 
 ```
-Flavorlytics/
-│
+Flavourytics/
 ├── data/
-│   ├── raw/
-│   └── cleaned/
-│
-├── notebooks/
-│   ├── 01_data_cleaning.ipynb
-│   ├── 02_eda.ipynb
-│   ├── 03_sentiment_analysis.ipynb
-│   ├── 04_recommendation_system.ipynb
-│   └── 05_success_prediction.ipynb
-│
-├── visuals/
-│
-├── reports/
-│
-├── README.md
-└── requirements.txt
+│   └── zomato.csv                 # Raw dataset (downloaded once)
+├── models/                        # Persisted model artifacts (joblib)
+│   ├── imputer_model.joblib       # Rating imputer model
+│   ├── preprocessor.joblib        # Fitted ColumnTransformer (OHE)
+│   ├── success_model.joblib       # RandomForestRegressor for rating prediction
+│   └── sentiment_data.joblib      # Precomputed sentiment analysis data
+├── src/                           # Core Python logic package
+│   ├── __init__.py
+│   ├── data_processing.py         # Data cleaning & recommendation logic
+│   ├── models.py                  # ML model training & Predict_success inference
+│   └── sentiment.py               # Review cleaning, TextBlob sentiment & NLTK keyword extraction
+├── pages/
+│   ├── 1_📊_EDA.py                # Recreated Plotly EDA charts
+│   ├── 2_🍽️_Recommendations.py    # Interactive recommendation engine
+│   ├── 3_🤖_Success_Prediction.py # ML success prediction interface
+│   └── 4_💬_Sentiment_Analysis.py # Sentiment analysis & complaint wordcloud
+├── Home.py                        # Streamlit main entrypoint & overview
+├── train_models.py                # One-time model training & precomputation script
+├── requirements.txt               # Dependencies
+└── README.md                      # Documentation
 ```
 
 ---
 
-## 🎯 Project Highlights
+## ⚡ Quick Start Guide
 
-- Cleaned and analyzed a restaurant dataset containing **50,000+ records**
-- Built an interactive recommendation system using customer preferences
-- Performed sentiment analysis on thousands of customer reviews
-- Compared multiple machine learning models for restaurant success prediction
-- Generated actionable business insights through visual analytics
+### 1. Install Dependencies
+
+Ensure Python 3.10+ is installed, then run:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Download Dataset
+
+Place the Zomato Bangalore Restaurants dataset at `data/zomato.csv`.
+
+If missing, download it using Python and `kagglehub`:
+
+```python
+import kagglehub
+import os, shutil
+
+path = kagglehub.dataset_download('himanshupoddar/zomato-bangalore-restaurants')
+os.makedirs('data', exist_ok=True)
+for item in os.listdir(path):
+    if item.endswith('.csv'):
+        shutil.copy(os.path.join(path, item), 'data/zomato.csv')
+```
+
+### 3. Run One-Time Training Script
+
+Train the rating imputer and Random Forest Success Prediction pipeline, and precompute sentiment metrics:
+
+```bash
+python train_models.py
+```
+
+> **Note**: Re-run `train_models.py` whenever the underlying dataset is updated.
+
+### 4. Launch Streamlit Web Application
+
+```bash
+streamlit run Home.py
+```
 
 ---
 
-## 🔮 Future Enhancements
+## ☁️ Deployment on Streamlit Community Cloud
 
-- Deploy the recommendation engine using Streamlit
-- Add interactive dashboards
-- Integrate real-time restaurant data
-- Improve recommendation accuracy using hybrid recommendation techniques
-- Perform deep learning-based sentiment analysis
+1. Push this repository to GitHub (ensure `data/zomato.csv` or model artifacts are tracked or downloaded).
+2. Connect your GitHub account to [Streamlit Community Cloud](https://share.streamlit.io/).
+3. Set main file path to `Home.py`.
+4. Deploy! The app automatically manages NLTK resource downloads and loads cached joblib models.
 
 ---
 
-## 📌 Conclusion
+## 🛠️ Features & Modules
 
-Flavorlytics demonstrates how data analytics, machine learning, and natural language processing can be combined to solve real-world business problems in the restaurant industry. The project transforms raw restaurant data into meaningful insights that support better customer decisions and business strategies.
+1. **📊 Exploratory Data Analysis (EDA)**: Interactive visual dashboards covering ratings, cost, cuisines, online ordering/booking trends, and city breakdown.
+2. **🍽️ Restaurant Recommendations**: Rule-based best-value scoring engine with custom budget, rating, and feature importance sliders.
+3. **🤖 Success Prediction**: ML classification predicting whether a restaurant will achieve a success rating ($\ge 3.8$).
+4. **💬 Sentiment Analysis**: Customer review sentiment polarity and complaint wordcloud for low-rated outlets ($\le 2.5$).
