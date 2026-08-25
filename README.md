@@ -1,3 +1,4 @@
+
 # 🍽️ Flavorlytics — AI-Powered Restaurant Analytics & Recommendation System
 
 Flavorlytics is a complete multi-page **Streamlit** web application for exploring restaurant trends, generating personalized best-value recommendations, predicting restaurant success with Machine Learning, and performing customer sentiment analysis on reviews.
@@ -85,6 +86,16 @@ streamlit run Home.py
 3. Set main file path to `Home.py`.
 4. Deploy! The app automatically manages NLTK resource downloads and loads cached joblib models.
 5. Local URL: http://localhost:8501
+
+<img width="1182" height="881" alt="Screenshot 2026-08-25 211825" src="https://github.com/user-attachments/assets/1e4ca0b9-93af-4936-a049-a788d8881f51" />
+<img width="1467" height="892" alt="Screenshot 2026-08-25 211343" src="https://github.com/user-attachments/assets/b2b57012-af55-4f4a-a4dc-7c41eedb8c15" />
+<img width="1041" height="867" alt="Screenshot 2026-08-25 211743" src="https://github.com/user-attachments/assets/991e3908-e551-48ff-86a4-a4e55f0e053e" />
+<img width="1653" height="830" alt="Screenshot 2026-08-25 211621" src="https://github.com/user-attachments/assets/fa84a3b7-c9fc-495f-a446-75e63a266e53" />
+<img width="1477" height="835" alt="Screenshot 2026-08-25 211526" src="https://github.com/user-attachments/assets/d4a7300d-7028-4ff6-bf7e-dc8aacb3396c" />
+
+
+
+
 
 
 ---
